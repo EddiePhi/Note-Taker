@@ -37,6 +37,9 @@ module.exports = function (app) {
     // req.body is available since we're using the body parsing middleware
     db.push(req.body);
     res.json({ db });
+    fs.writeFile('../db/db.json', JSON.stringify(db), {}, () => {
+      res.send(db);
+    });
   });
 
   // Referencing app.delete and fs.writeFile from LanChi Pham: https://github.com/lpham2525/notetaker/blob/master/server.js
